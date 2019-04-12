@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour {
+	AudioManager audioManager;
 	Animator animator;
 	PlayerMove playerMove;
 	PlayerStat playerStat;
@@ -30,6 +31,7 @@ public class PlayerAttack : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+		audioManager = FindObjectOfType<AudioManager>();
 		animator = GetComponent<Animator>();
 		playerMove = GetComponent<PlayerMove>();
 		playerStat = GetComponent<PlayerStat>();
@@ -114,6 +116,8 @@ public class PlayerAttack : MonoBehaviour {
 	{
 		nextFire = Time.time + fireRate;
 		Rigidbody2D bullet = Instantiate(BulletPrefab.GetComponent<Rigidbody2D>(), ExitPoints[index].position, Quaternion.identity);
+
+		audioManager.PlaySoundOneShot("Shoot");
 
 		playerStat.ammo --;
 		

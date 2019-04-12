@@ -43,7 +43,7 @@ public class EnemyAttack : MonoBehaviour {
 		
 		nextFire = Time.time + fireRate;
 		Rigidbody2D bullet = Instantiate(BulletPrefab.GetComponent<Rigidbody2D>(), ExitPoints[index].position, Quaternion.identity);
-
+		FindObjectOfType<AudioManager>().PlaySoundOneShot("Shoot");
 		
 
 		//arah tembakan

@@ -8,9 +8,11 @@ public class ButtonSavedAnimal : MonoBehaviour {
 	public GameObject PanelSavedAnimal;
 	
 	public void ActivateSavedAnimalPanel(){
+		FindObjectOfType<AudioManager>().PlaySound("Button Click");
 		PanelSavedAnimal.SetActive(true);
 	}
 	public void DeactivateSavedAnimalPanel(){
+		FindObjectOfType<AudioManager>().PlaySound("Button Click");
 		PanelSavedAnimal.SetActive(false);
 	}
 	public void FillAnimalID(){

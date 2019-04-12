@@ -78,6 +78,7 @@ public class EnemyFSM : FSM {
     private void UpdateStateTertangkapState()
     {
         gameObject.SetActive(false);
+		FindObjectOfType<AudioManager>().PlaySoundOneShot("Enemy Defeated");
     }
 
     private void UpdateStateKaburState()

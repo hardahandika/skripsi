@@ -35,6 +35,8 @@ public class StageManager : MonoBehaviour {
 	}
 
 	public void GameOver(){
+		FindObjectOfType<AudioManager>().StopPlaying("BGM In Game");
+		FindObjectOfType<AudioManager>().PlaySound("BGM Result");
 		Time.timeScale = 0f;
 		gameOverText.text = SetGameOverMessage();
 		foreach(GameObject animal in animals){
