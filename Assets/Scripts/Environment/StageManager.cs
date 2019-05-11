@@ -12,23 +12,31 @@ public class StageManager : MonoBehaviour {
 	public GameObject[] animals;
 
 	int savedAnimalCount;
-	public bool isOutOfTime, isOutOfHealth, enemyWiped, allAnimalSaved;
+	public bool isOutOfTime, isOutOfHealth, enemyWiped, allAnimalSaved, allAnimalCaptured, someAnimalSaved;
 
     // Use this for initialization
     void Start () {
-	
+		animals = GameObject.FindGameObjectsWithTag("Target");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		
 		
 		if(GameObject.FindGameObjectsWithTag("Enemy").Length == 0){
 			enemyWiped = true;
 		}
 		
-		if (GameObject.FindGameObjectsWithTag("Target").Length == 0){
-			allAnimalSaved = true;
+		if (GameObject.FindGameObjectsWithTag("Target").Length == 0 || isOutOfTime){
+			if(savedAnimalCount == animals.Length){
+				allAnimalSaved = true;
+			}
+			else if(savedAnimalCount == 0){
+				allAnimalCaptured = true;
+			}
+			else{
+				someAnimalSaved = true;
+			}
 			GameOver();
 		}
 
@@ -39,11 +47,13 @@ public class StageManager : MonoBehaviour {
 		FindObjectOfType<AudioManager>().PlaySound("BGM Result");
 		Time.timeScale = 0f;
 		gameOverText.text = SetGameOverMessage();
+
 		foreach(GameObject animal in animals){
 			if (animal.GetComponent<AnimalStat>().isSaved == true){
 				savedAnimalCount++;
 			}
 		}
+
 		gameOverElaborationText.text = "Satwa yang berhasil diselamatkan : " + (savedAnimalCount);
 		panelGameOver.SetActive(true);
 		if(isOutOfTime || isOutOfHealth){
@@ -69,10 +79,7 @@ public class StageManager : MonoBehaviour {
 
 	string SetGameOverMessage()
 	{
-		if(isOutOfTime){
-			return "Anda kehabisan waktu.";
-		}
-		else if(isOutOfHealth){
+		if(isOutOfHealth){
 			return "Anda dikalahkan oleh pemburu.";
 		}
 		else if(enemyWiped && allAnimalSaved){
@@ -80,6 +87,12 @@ public class StageManager : MonoBehaviour {
 		}
 		else if(allAnimalSaved){
 			return "Anda berhasil menyelamatkan semua hewan.";
+		}
+		else if(allAnimalCaptured){
+			return "Anda gagal menyelamatkan satu pun satwa.";
+		}
+		else if(someAnimalSaved){
+			return "Anda berhasil menyelamatkan sebagian satwa di hutan.";
 		}
 		return null;
 	}

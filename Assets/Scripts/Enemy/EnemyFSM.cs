@@ -24,7 +24,7 @@ public class EnemyFSM : FSM {
 		[SerializeField] GameObject[] patrolPoints;
 		GameObject objPlayer;
 		GameObject objTarget;
-		int index = 0;
+		int index;
 	protected override void Initialize ()
 	{            
 			
@@ -37,7 +37,7 @@ public class EnemyFSM : FSM {
 		animator = GetComponent<Animator>();
 		objPlayer = GameObject.FindGameObjectWithTag ("Player");
 		playerTransform = objPlayer.transform;
-		
+		index = UnityEngine.Random.Range(0, patrolPoints.Length-1);
 		ai = GetComponent<AstarAI>();
 	}
 
@@ -127,7 +127,7 @@ public class EnemyFSM : FSM {
 			currentState = FSMState.KejarPlayer;
 		}
 		//transisi ke state Patrol
-		else if(Vector3.Distance(transform.position, FindClosestTarget("Target").transform.position) > 12){
+		else if(Vector3.Distance(transform.position, FindClosestTarget("Target").transform.position) > 18){
 			currentState = FSMState.Patrol;
 		}
     }
@@ -136,7 +136,7 @@ public class EnemyFSM : FSM {
     {
 		//transisi ke state Kabur
 		Debug.Log("Distance = "+Vector3.Distance(transform.position, playerTransform.position));
-		if(enemyStat.health.MyCurrentValue <= 20){
+		if(enemyStat.health.MyCurrentValue <= 30){
 			currentState = FSMState.Kabur;
 		}
 		//transisi ke state Patrol
@@ -156,7 +156,7 @@ public class EnemyFSM : FSM {
     private void UpdateKejarTargetState()
     {
 		//transisi ke state Patrol
-		if(Vector3.Distance(transform.position, FindClosestTarget("Target").transform.position) > 12){
+		if(Vector3.Distance(transform.position, FindClosestTarget("Target").transform.position) > 18){
 			currentState = FSMState.Patrol;
 		}
 		//transisi ke state Kejar Player
@@ -172,7 +172,7 @@ public class EnemyFSM : FSM {
     private void UpdatePatrolState()
     {
 		//transisi ke state Kejar Target
-		if(Vector3.Distance(transform.position, FindClosestTarget("Target").transform.position) <= 12){
+		if(Vector3.Distance(transform.position, FindClosestTarget("Target").transform.position) <= 18){
 			currentState = FSMState.KejarTarget;
 		}
 		//transisi ke state Kejar Player
@@ -185,12 +185,7 @@ public class EnemyFSM : FSM {
 		ai.speed = 2;
 		ai.targetPosition = patrolPoints[index].transform;
 		if(Vector3.Distance(transform.position, patrolPoints[index].transform.position) <= 1){
-			if(index == patrolPoints.Length-1){
-				index = 0;
-			}
-			else{
-				index++;
-			}
+			index = UnityEngine.Random.Range(0, patrolPoints.Length-1);
 		}
 		
     }

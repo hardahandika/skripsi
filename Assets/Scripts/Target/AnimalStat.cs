@@ -8,10 +8,10 @@ public class AnimalStat : MonoBehaviour {
 	public Stat health;
 	public Stat savemeter;
 	public Image image;
-	float drainRate = 7f;
+	float drainRate = 13f;
 	float regenRate = 10f;
-	float regenSaveRate = 20f;
-	public bool isSaved = false;
+	float regenSaveRate = 25f;
+	public bool isSaved;
 
 	// Use this for initialization
 	void Start () {

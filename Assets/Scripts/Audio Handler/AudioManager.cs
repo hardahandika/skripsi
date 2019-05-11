@@ -31,21 +31,34 @@ public class AudioManager : MonoBehaviour {
 		Scene currentScene = SceneManager.GetActiveScene();
 		string sceneName = currentScene.name;
 
-		if(sceneName == "MainMenu"){
+		switch(sceneName){
+			case "MainMenu":
 			StopPlaying("BGM In Game");
 			StopPlaying("BGM Result");
 			PlaySound("BGM Menu");
-		}
-		else if(sceneName == "PilihStage"){
+			break;
+
+			case "PilihStage":
 			StopPlaying("BGM In Game");
 			StopPlaying("BGM Result");
 			PlaySound("BGM Menu");
-		}
-		else if(sceneName == "StageAsiatis"){
+			break;
+
+			case "StageAsiatis":
 			StopPlaying("BGM Menu");
 			PlaySound("BGM In Game");
+			break;
+
+			case "StagePeralihan":
+			StopPlaying("BGM Menu");
+			PlaySound("BGM In Game");
+			break;
+
+			case "StageAustralis":
+			StopPlaying("BGM Menu");
+			PlaySound("BGM In Game");
+			break;
 		}
-		
 	}
 	
 	public void PlaySound(string name)

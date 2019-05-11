@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class CountdownTimer : MonoBehaviour {
 	public Text timeText;
+
+	public bool gameisStarted;
 	float totalTime = 120f; //2 minutes
 
 	public StageManager stageManager;

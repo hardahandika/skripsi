@@ -22,6 +22,9 @@ TagManager:
   - Animal Name
   - Animal Image
   - Animal Description
+  - Button Switch Weapon
+  - Ammo
+  - Map
   layers:
   - Default
   - TransparentFX

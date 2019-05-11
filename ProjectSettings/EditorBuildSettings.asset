@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StageAsiatis.unity
     guid: dfb7d795ef5224f42a856daba016558e
+  - enabled: 1
+    path: Assets/Scenes/StagePeralihan.unity
+    guid: 6e33daa79b549b34784053af36bb70c5
+  - enabled: 1
+    path: Assets/Scenes/StageAustralis.unity
+    guid: d8396502cdbbbfe4bb2067ae4b12d26b
   m_configObjects: {}

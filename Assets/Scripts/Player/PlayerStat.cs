@@ -7,7 +7,7 @@ public class PlayerStat : MonoBehaviour {
 
 	public Stat health;
 	public Stat stamina;
-	public int ammo, ammoMax;
+	public int machinegunAmmo, rifleAmmo, ammoMax;
 	PlayerMove playerMove;
 	Image image;
 	public Text ammoText;
@@ -26,7 +26,8 @@ public class PlayerStat : MonoBehaviour {
 		stamina.MyMaxValue = 100;
 		stamina.MyCurrentValue = stamina.MyMaxValue;
 		ammoMax = 0;
-		ammo = 30;
+		machinegunAmmo = 30;
+		rifleAmmo = 10;
 		playerMove = GetComponent<PlayerMove>();
 		image = GameObject.FindWithTag("Player Stamina Bar").GetComponent<Image>();
 	}

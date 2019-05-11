@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4736017786537510}
   - component: {fileID: 212029828667536940}
   - component: {fileID: 50475343863969604}
-  - component: {fileID: 114811471209399984}
   - component: {fileID: 61154515972876734}
+  - component: {fileID: 114811471209399984}
   m_Layer: 0
   m_Name: bulletPrefab
   m_TagString: Untagged
@@ -77,8 +77,8 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.026640236}
   m_SpriteTilingProperty:
-    border: {x: 0.7, y: 0.8, z: 0.7, w: 0.75}
-    pivot: {x: 0.5, y: 0.5161456}
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.65, y: 1.65}
     newSize: {x: 0.33, y: 0.33}
     adaptiveTilingThreshold: 0.5
@@ -135,7 +135,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: afe9b261e9fe4164aba94b3b86badfa1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 69d25f539af0c65468b0c89e81230f76, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

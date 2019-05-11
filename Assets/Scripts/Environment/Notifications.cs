@@ -9,25 +9,43 @@ public class Notifications : MonoBehaviour {
 	int animalsTotal = 4;
 	PlayerStat playerStat;
 	PlayerAttack playerAttack;
+	private bool showText = false, someRandomCondition = true;
+    private float currentTime = 0.0f, executedTime = 0.0f, timeToWait = 2.0f;
 
 	void Start()
 	{
 		playerStat = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStat>();
 		playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
 		notif = GetComponent<Text>();
+		notif.enabled = false;
 	}
 	void Update()
 	{
+		currentTime = Time.time;
+
+         
+		if(executedTime != 0.0f)
+		{
+			if(currentTime - executedTime > timeToWait)
+			{
+				executedTime = 0.0f;
+				notif.enabled = false;
+			}
+		}
 		//CheckAmmo();
 		//CheckEnemy();
 
 		if(GameObject.FindGameObjectsWithTag("Target").Length < animalsTotal){
-			StartCoroutine("CountAnimal");
+			CountAnimal();
 		}
+		if(GameObject.FindGameObjectWithTag("Button Switch Weapon").GetComponent<ButtonEvents>().isButtonDown){
+			ChangeWeapon();
+		}
+		
 	}
 
 	void CheckAmmo(){
-		if(playerStat.ammo == 0 && playerStat.ammoMax == 0){
+		if(playerStat.machinegunAmmo == 0 && playerStat.rifleAmmo == 0){
 			if(playerAttack.shootButton.isButtonDown){
 				notif.text = "Amunisi habis, silakan isi kembali";
 			}
@@ -49,12 +67,18 @@ public class Notifications : MonoBehaviour {
 		}
 	}
 
-	IEnumerator CountAnimal(){
-		if(GameObject.FindGameObjectsWithTag("Target").Length < animalsTotal)
+	void CountAnimal(){
+		notif.enabled = true;
+		executedTime = Time.time;
 		notif.text = "Sisa satwa di hutan = " + GameObject.FindGameObjectsWithTag("Target").Length.ToString();
 		animalsTotal --;
-		yield return new WaitForSeconds(2);
-		notif.text = "";
-		yield return null;
+		
+		
+		
+	}
+	public void ChangeWeapon(){
+		notif.enabled = true;
+		executedTime = Time.time;
+		notif.text = "Senjata berganti ke " + playerAttack.activeWeapon;
 	}
 }

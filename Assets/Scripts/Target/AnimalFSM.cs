@@ -22,7 +22,7 @@ public class AnimalFSM : FSM {
 		[SerializeField] GameObject[] patrolPoints;
 		GameObject enemy;
 		public GameObject savemeter;
-		int index = 0;
+		int index ;
 	protected override void Initialize ()
 	{            
 			
@@ -33,6 +33,7 @@ public class AnimalFSM : FSM {
 		animator = GetComponent<Animator>();
 		animalStat = GetComponent<AnimalStat>();
 		ai = GetComponent<AnimalMove>();
+		index = UnityEngine.Random.Range(0, patrolPoints.Length-1);
 	}
 
 	//Update each frame
@@ -68,6 +69,7 @@ public class AnimalFSM : FSM {
 
     private void UpdateTerselamatkanState()
     {
+		animalStat.isSaved = true;
 		gameObject.SetActive(false);
 		FindObjectOfType<AudioManager>().PlaySoundOneShot("Animal Saved");
     }
@@ -91,8 +93,10 @@ public class AnimalFSM : FSM {
 
 		
         ai.enabled = false;
+		if(Vector3.Distance(transform.position, FindClosestTarget("Player").transform.position) < 11){
+			animalStat.DrainHealth();
+		}
 		
-		animalStat.DrainHealth();
     }
 
     private void UpdateStateTertangkapState()
@@ -111,12 +115,7 @@ public class AnimalFSM : FSM {
 		ai.speed = 1.6f;
 		ai.targetPosition = patrolPoints[index].transform;
 		if(Vector3.Distance(transform.position, patrolPoints[index].transform.position) <= 1){
-			if(index == patrolPoints.Length-1){
-				index = 0;
-			}
-			else{
-				index++;
-			}
+			index = UnityEngine.Random.Range(0, patrolPoints.Length-1);
 		}
 		
     }
